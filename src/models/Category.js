@@ -8,11 +8,22 @@ const categorySchema = new mongoose.Schema({
         type:String,
         required:true,
         maxlength: 60,
-    }
-    // childCategories:{
-    //     type:mongoose.Types.Subdocument
-    // }
+        unique:true,
+        uppercase:true
+    },
+    childCategory:[{
+        category:{
+            type:mongoose.Types.ObjectId,
+            ref:'Category'
+        }
+    }]
+},{timestamps:true});
 
-});
+
+categorySchema.pre('save',function(next){
+    const cat = this;
+    console.log(cat);
+    next()
+})
 
 module.exports = Category = mongoose.model('Category',categorySchema);
