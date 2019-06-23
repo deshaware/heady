@@ -44,7 +44,7 @@ router.post('/', async (req,res) =>{
             res.status(400).send({"error":"Please provide productName, price and category of the product"})
         }
     } catch (error) {
-        res.status(402).send(error)
+        res.status(400).send(error)
     }
 });
 

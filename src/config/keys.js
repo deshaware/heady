@@ -1,1 +1,1 @@
-module.exports = mongodbUri = `mongodb+srv://praful:Praful123@cluster0-8dzwo.azure.mongodb.net/heady?retryWrites=true&w=majority`;
+module.exports = mongodbUri = process.env.MONGOLAB_URI;
