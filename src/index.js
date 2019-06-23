@@ -3,8 +3,9 @@ const app = express();
 const bodyParser = require('body-parser');
 require('./db/mongo');
 
-// const category = require('./routes/category')
-// const product = require('./routes/product')
+const category = require('./routes/category')
+const product = require('./routes/product')
+const test = require('./routes/test')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
@@ -13,6 +14,7 @@ app.use(bodyParser.urlencoded({
 
 app.use('/api/category',category)
 app.use('/api/product',product)
+app.use('/api/test',test)
 
 const port = process.env.port || 3000;
 

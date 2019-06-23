@@ -1,6 +1,7 @@
 
 const mongoose = require('mongoose');
 // const validator = require('validator');
+const category = require('./Category');
 
 const productSchema = new mongoose.Schema({
     productID:{
@@ -11,13 +12,19 @@ const productSchema = new mongoose.Schema({
         required:true,
         maxlength: 60,
     },
-    parentProduct:{
-        type:mongoose.Types.Subdocument
+    price:{
+        type:Number,
+        required:true
+    },
+    category:{
+        type:mongoose.Types.ObjectId,
+        ref:'Category'
     }
-    // category:{
-    //     type: mongoose.Types.ObjectId,
-    //     ref:'Category'
-    // }
 });
+
+productSchema.pre('save',(next)=>{
+    console.log("Pre saving product")
+    next()
+})
 
 module.exports = Products = mongoose.model('Products',productSchema);

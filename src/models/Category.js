@@ -1,5 +1,16 @@
 const mongoose = require('mongoose');
 
+const subCategorySchema = new mongoose.Schema({
+    categoryID:{
+        type: mongoose.Types.ObjectId,
+    },
+    categoryName:{
+        type:String,
+        required:true,
+        maxlength: 60,
+        uppercase:true
+    }
+},{timestamps:true})
 const categorySchema = new mongoose.Schema({
     categoryID:{
         type: mongoose.Types.ObjectId,
@@ -11,12 +22,7 @@ const categorySchema = new mongoose.Schema({
         unique:true,
         uppercase:true
     },
-    childCategory:[{
-        category:{
-            type:mongoose.Types.ObjectId,
-            ref:'Category'
-        }
-    }]
+    subCategories:[subCategorySchema]
 },{timestamps:true});
 
 
@@ -27,3 +33,4 @@ categorySchema.pre('save',function(next){
 })
 
 module.exports = Category = mongoose.model('Category',categorySchema);
+// module.exports = subCategorySchema;

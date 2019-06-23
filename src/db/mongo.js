@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const uri = require('../config/keys');
+const Category = require('../models/Category');
 
 mongoose.connect(uri,{
     useNewUrlParser:true,
@@ -8,25 +9,10 @@ mongoose.connect(uri,{
     console.log("Connected to the database")
 }).catch(e=>console.log(`Error while connecting to db ${e}`));
 
-const catChildSchema = new mongoose.Schema({
-    _id:{
-        type:mongoose.Types.ObjectId()
-    },
-    name:{
-        type:String
-    }
-});
-
-const catSchema = new mongoose.Schema({
-    name:{
-        type:String
-    },
-    children:[catChildSchema]
-});
-
-const category = mongoose.model('category',catSchema);
-const cat = new category({name:"Books",children:[{name:"Audio"}]})
-
-cat.save().then(r=>console.log(r)).catch(e=>console.log(e))
-
+//This worked
+// Category.find({
+//     "subCategories.categoryName":"BAG"
+// }).then(r=>{
+//     console.log(r[0].subCategories.filter(r=>r.categoryName==="BAG"))
+// });
 
