@@ -10,7 +10,7 @@ const subCategorySchema = new mongoose.Schema({
         maxlength: 60,
         uppercase:true
     }
-},{timestamps:true})
+})
 const categorySchema = new mongoose.Schema({
     categoryID:{
         type: mongoose.Types.ObjectId,
@@ -23,7 +23,7 @@ const categorySchema = new mongoose.Schema({
         uppercase:true
     },
     subCategories:[subCategorySchema]
-},{timestamps:true});
+});
 
 
 categorySchema.pre('save',function(next){

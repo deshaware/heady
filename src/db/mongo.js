@@ -11,8 +11,7 @@ mongoose.connect(uri,{
 
 //This worked
 // Category.find({
-//     "subCategories.categoryName":"BAG"
+//     "subCategories.categoryName":"MOBILE"
 // }).then(r=>{
 //     console.log(r[0].subCategories.filter(r=>r.categoryName==="BAG"))
 // });
-
