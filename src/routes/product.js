@@ -18,13 +18,25 @@ router.get('/', async(req,res)=>{
 router.post('/price', async (req,res) =>{
     try {
         const productName = req.body.productName ? req.body.productName.toUpperCase() : null;
-        const price = req.body.price ? req.body.price.toUpperCase() : null;
+        const price = req.body.price ? req.body.price : null;
         //check if the product exist
+        const product = await Product.findOneAndUpdate({
+            productName:productName
+        },{
+            $set:{
+                price:price
+            }
+        });
+        if(!product) res.status(404).json({"error":"Product Does not exist"})
+        res.status(200).json(product);
     } catch (error) {
         
     }
 });
 
+//@route "/"
+//@name  add product
+//@desc  To add product
 router.post('/', async (req,res) =>{
     console.log(req.body.category)
     try {
@@ -40,7 +52,11 @@ router.post('/', async (req,res) =>{
                     "subCategories.categoryName":category
                 });
                 cat = cat.subCategories[0];
-            }  
+                if(!cat){
+                    //Category does not exist
+                    res.send(400).json({"error":"Category does not exist, please create category first"})
+                }
+            }
             const res = new Product({
                 productName:productName,
                 price:price,

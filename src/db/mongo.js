@@ -4,7 +4,7 @@ const Category = require('../models/Category');
 
 mongoose.connect(uri,{
     useNewUrlParser:true,
-    useCreateIndex:true
+    useCreateIndex:true,useFindAndModify:true
 }).then((s)=>{
     console.log("Connected to the database")
 }).catch(e=>console.log(`Error while connecting to db ${e}`));
